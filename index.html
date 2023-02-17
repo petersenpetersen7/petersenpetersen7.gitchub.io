@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - A Pen by Anthony P</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+	<title>Baseball Pitching Stats Calculator</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>Baseball Pitching Stats Calculator</h1>
+	<form>
+		<label for="inningsPitched">Innings Pitched:</label>
+		<input type="number" id="inningsPitched" 
+          name="inningsPitched" required><br>
+
+		<label for="earnedRuns">Earned Runs:</label>
+		<input type="number" id="earnedRuns" name="earnedRuns" required><br>
+
+		<label for="hitsAllowed">Hits Allowed:</label>
+		<input type="number" id="hitsAllowed" name="hitsAllowed" required><br>
+
+		<label for="walksAllowed">Walks Allowed:</label>
+		<input type="number" id="walksAllowed" name="walksAllowed" required><br>
+
+		<label for="strikeouts">Strikeouts:</label>
+		<input type="number" id="strikeouts" name="strikeouts" required><br>
+
+		<label for="homeRunsAllowed">Home Runs Allowed:</label>
+		<input type="number" id="homeRunsAllowed" name="homeRunsAllowed" required><br>
+
+		<label for="hitByPitch">Hit By Pitch:</label>
+		<input type="number" id="hitByPitch" name="hitByPitch" required><br>
+
+		<button type="button" onclick="calculate()">Calculate Stats</button>
+	</form>
+
+	<p><strong>Stats:</strong></p>
+	<p>ERA: <span id="era"></span></p>
+	<p>K/9: <span id="k9"></span></p>
+	<p>BB/9: <span id="bb9"></span></p>
+	<p>K/BB: <span id="kbb"></span></p>
+	<p>HR/9: <span id="hr9"></span></p>
+	<p>K%: <span id="kPercent"></span></p>
+	<p>BB%: <span id="bbPercent"></span></p>
+	<p>K-BB%: <span id="kbbPercent"></span></p>
+	<p>Opp. Batting Average: <span id="oppAvg"></span></p>
+	<p>WHIP: <span id="whip"></span></p>
+	<p>BABIP: <span id="babip"></span></p>
+	<p>HBP%: <span id="hbpPercent"></span></p>
+	<p>H/9: <span id="h9"></span></p>
+	<p>SO/9: <span id="so9"></span></p>
+	<p>SO/W: <span id="soW"></span></p>
+
+	<script>
+		function calculate() {
+			// Get values from form inputs
+			let inningsPitched = parseFloat(document.getElementById("inningsPitched").value);
+			let earnedRuns = parseFloat(document.getElementById("earnedRuns").value);
+			let hitsAllowed = parseFloat(document.getElementById("hitsAllowed").value);
+			let walksAllowed = parseFloat(document.getElementById("walksAllowed").value);
+			let strikeouts = parseFloat(document.getElementById("strikeouts").value);
+			let homeRunsAllowed = parseFloat(document.getElementById("homeRunsAllowed").value);
+			let hitByPitch = parseFloat(document.getElementById("hitByPitch").value);
+
+			// Calculate stats
+			let era = (earnedRuns / inningsPitched) * 9;
+			let k9 = (strikeouts / inningsPitched) * 9;
+			let bb9 = (walksAllowed / inningsPitched) * 9;
+			let kbb = strikeouts / walksAllowed;
+			let hr9 = (homeRunsAllowed / inningsPitched) * 9;
+			let kPercent = (strikeouts / (inningsPitched * 3)) * 100;
+			let bbPercent = (walksAllowed / (inningsPitched * 3)) * 100;
+			let kbbPercent = ((strikeouts - walksAllowed) / (inningsPitched * 3)) * 100;
+			let oppAvg = (hitsAllowed / (inningsPitched * 3)).toFixed(3);
+			let whip = ((hitsAllowed + walksAllowed) / inningsPitched).toFixed(2);
+			let babip = ((hitsAllowed - homeRunsAllowed) / (inningsPitched * 3 - strikeouts - homeRunsAllowed - earnedRuns)).toFixed(3);
+			let hbpPercent = (hitByPitch / (inningsPitched * 3)) * 100;
+			let h9 = (hitsAllowed / inningsPitched) * 9;
+			let so9 = (strikeouts / inningsPitched) * 9;
+			let soW = strikeouts / walksAllowed;
+
+			// Update stats on page
+			document.getElementById("era").innerHTML = era.toFixed(2);
+			document.getElementById("k9").innerHTML = k9.toFixed(2);
+			document.getElementById("bb9").innerHTML = bb9.toFixed(2);
+			document.getElementById("kbb").innerHTML = kbb.toFixed(2);
+			document.getElementById("hr9").innerHTML = hr9.toFixed(2);
+			document.getElementById("kPercent").innerHTML = kPercent.toFixed(1) + "%";
+			document.getElementById("bbPercent").innerHTML = bbPercent.toFixed(1) + "%";
+			document.getElementById("kbbPercent").innerHTML = kbbPercent.toFixed(1) + "%";
+			document.getElementById("oppAvg").innerHTML = oppAvg;
+			document.getElementById("whip").innerHTML = whip;
+			document.getElementById("babip").innerHTML = babip;
+			document.getElementById("hbpPercent").innerHTML = hbpPercent.toFixed(1) + "%";
+			document.getElementById("h9").innerHTML = h9.toFixed(2);
+			document.getElementById("so9").innerHTML = so9.toFixed(2);
+			document.getElementById("soW").innerHTML = soW.toFixed(2);
+		}
+	</script>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
